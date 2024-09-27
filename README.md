@@ -36,7 +36,7 @@ and also not implemented currently:
     }
 ```
 
-For `${vrm_core_version}`, you may look up [maven repo](https://github.com/singlerr/mvn-repo/raw/maven2/) to figure out
+For `${vrm_core_version}`, you may look up [maven repo](https://github.com/singlerr/mvn-repo) to figure out
 which version is available
 
 ----
