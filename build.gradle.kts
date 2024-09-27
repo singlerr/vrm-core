@@ -7,7 +7,7 @@ plugins {
 val majorVersion = "0.1"
 
 group = "io.github.singlerr.semaphore"
-version = "${majorVersion}-${System.getenv()["BUILD_NUMBER"] ?: "999"}"
+version = "${majorVersion}.${System.getenv()["BUILD_NUMBER"] ?: "999"}"
 
 repositories {
     mavenCentral()
