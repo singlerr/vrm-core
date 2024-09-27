@@ -26,6 +26,15 @@ tasks.test {
 }
 
 
+java{
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType<Javadoc>{
+    isFailOnError = false
+}
+
 publishing {
     repositories {
         maven {
