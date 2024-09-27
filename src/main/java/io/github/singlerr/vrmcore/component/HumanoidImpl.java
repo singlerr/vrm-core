@@ -1,6 +1,8 @@
 package io.github.singlerr.vrmcore.component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.github.singlerr.vrmcore.HumanBone;
 import io.github.singlerr.vrmcore.Humanoid;
 import java.util.List;
 import lombok.Data;
@@ -37,5 +39,6 @@ class HumanoidImpl implements Humanoid {
   private boolean hasTranslationDoF;
 
   @JsonProperty("humanBones")
-  private List<HumanBoneImpl> bones;
+  @JsonDeserialize(using = HumanBoneDeserializer.class)
+  private List<HumanBone> bones;
 }

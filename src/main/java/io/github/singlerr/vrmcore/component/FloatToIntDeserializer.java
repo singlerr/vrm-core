@@ -15,7 +15,7 @@ public final class FloatToIntDeserializer extends StdDeserializer<Integer> {
 
   @Override
   public Integer deserialize(JsonParser p, DeserializationContext ctxt)
-      throws IOException, JacksonException {
+      throws IOException {
     if (p.currentToken() == JsonToken.FIELD_NAME) {
       p.nextToken();
     }

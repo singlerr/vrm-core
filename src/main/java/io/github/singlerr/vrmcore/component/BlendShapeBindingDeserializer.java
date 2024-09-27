@@ -11,7 +11,7 @@ public class BlendShapeBindingDeserializer extends JsonDeserializer<BlendShapeBi
 
   @Override
   public BlendShapeBinding deserialize(JsonParser p, DeserializationContext ctxt)
-      throws IOException, JacksonException {
+      throws IOException {
     return p.readValueAs(BlendShapeBindingImpl.class);
   }
 }
