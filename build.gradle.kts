@@ -6,7 +6,7 @@ plugins {
 
 val majorVersion = "0.1"
 
-group = "io.github.singlerr.semaphore"
+group = "io.github.singlerr.vrmcore"
 version = "${majorVersion}.${System.getenv()["BUILD_NUMBER"] ?: "999"}"
 
 repositories {
