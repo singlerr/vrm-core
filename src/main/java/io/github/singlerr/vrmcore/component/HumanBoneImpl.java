@@ -1,8 +1,11 @@
 package io.github.singlerr.vrmcore.component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import de.javagl.jgltf.model.GltfModel;
+import de.javagl.jgltf.model.NodeModel;
 import io.github.singlerr.vrmcore.HumanBone;
 import lombok.Data;
 import lombok.Getter;
@@ -22,4 +25,11 @@ class HumanBoneImpl implements HumanBone {
   @JsonProperty("useDefaultValues")
   @Accessors(fluent = true)
   private boolean useDefaultValues;
+
+  @JsonIgnore
+  private NodeModel targetNode;
+
+  public void init(GltfModel model) {
+    this.targetNode = model.getNodeModels().get(node);
+  }
 }

@@ -23,6 +23,7 @@ import de.javagl.jgltf.model.SkinModel;
 import de.javagl.jgltf.model.TextureModel;
 import io.github.singlerr.vrmcore.BlendShapeBinding;
 import io.github.singlerr.vrmcore.BlendShapeGroup;
+import io.github.singlerr.vrmcore.HumanBone;
 import io.github.singlerr.vrmcore.Humanoid;
 import io.github.singlerr.vrmcore.VRMExtension;
 import io.github.singlerr.vrmcore.utils.Validate;
@@ -58,6 +59,7 @@ class VRM implements VRMExtension {
   public void init(GltfModel base) {
     this.base = base;
     getBlendShapeGroups().forEach(g -> initBlendShapeGroup(g, base));
+    getHumanoid().getBones().forEach(b -> initHumanBone(b, base));
   }
 
   private void initBlendShapeGroup(BlendShapeGroup group, GltfModel model) {
@@ -66,6 +68,10 @@ class VRM implements VRMExtension {
 
   private void initBlendShapeBindings(BlendShapeBinding binding, GltfModel model) {
     ((BlendShapeBindingImpl) binding).init(model);
+  }
+
+  private void initHumanBone(HumanBone bone, GltfModel model) {
+    ((HumanBoneImpl) bone).init(model);
   }
 
   @Override
