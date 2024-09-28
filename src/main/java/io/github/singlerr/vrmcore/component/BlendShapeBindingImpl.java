@@ -16,6 +16,7 @@ class BlendShapeBindingImpl implements BlendShapeBinding {
   @JsonProperty("mesh")
   @JsonDeserialize(using = FloatToIntDeserializer.class)
   private int index;
+  @JsonProperty("index")
   @JsonDeserialize(using = FloatToIntDeserializer.class)
   private int node;
   @JsonProperty("weight")
@@ -27,6 +28,4 @@ class BlendShapeBindingImpl implements BlendShapeBinding {
   public void init(GltfModel model) {
     this.targetNode = model.getNodeModels().get(node);
   }
-
-
 }

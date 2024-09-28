@@ -1,5 +1,6 @@
 package io.github.singlerr.vrmcore.component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.github.singlerr.vrmcore.BlendShapeBinding;
@@ -10,6 +11,7 @@ import lombok.Getter;
 
 @Data
 @Getter
+@JsonIgnoreProperties(value = {"materialValues"})
 class BlendShapeGroupImpl implements BlendShapeGroup {
 
   @JsonProperty("binds")

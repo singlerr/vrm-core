@@ -1,6 +1,7 @@
 package io.github.singlerr.vrmcore.component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -20,51 +21,57 @@ import de.javagl.jgltf.model.NodeModel;
 import de.javagl.jgltf.model.SceneModel;
 import de.javagl.jgltf.model.SkinModel;
 import de.javagl.jgltf.model.TextureModel;
+import io.github.singlerr.vrmcore.BlendShapeBinding;
 import io.github.singlerr.vrmcore.BlendShapeGroup;
 import io.github.singlerr.vrmcore.Humanoid;
 import io.github.singlerr.vrmcore.VRMExtension;
-import io.github.singlerr.vrmcore.VRMLoader;
+import io.github.singlerr.vrmcore.utils.Validate;
 import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-
+@JsonIgnoreProperties(value = {"exporterVersion", "meta", "firstPerson", "secondaryAnimation",
+    "materialProperties", "specVersion"})
 class VRM implements VRMExtension {
 
   @JsonIgnore
   private static final JsonMapper MAPPER = new JsonMapper();
 
-  static {
-    VRMLoader.setFactory(model -> {
-      try {
-        VRM vrm = create(model);
-        vrm.init(model);
-        return vrm;
-      } catch (JsonProcessingException e) {
-        return null;
-      }
-    });
-  }
+  public static VRM create(GltfModel model) throws JsonProcessingException {
+    Map<String, Object> root =
+        (Map<String, Object>) Validate.getOrThrow(model.getExtensions(), "VRM");
 
-  private static VRM create(GltfModel model) throws JsonProcessingException {
-    String json = MAPPER.writeValueAsString(model.getExtensions());
-    return MAPPER.readValue(json, VRM.class);
+    return MAPPER.convertValue(root, VRM.class);
   }
 
   @JsonIgnore
   private GltfModel base;
 
-  @JsonProperty("blendShapeGroup")
-  @JsonDeserialize(using = BlendShapeGroupDeserializer.class)
-  @Getter
-  private List<BlendShapeGroup> blendShapeGroups;
+  @JsonProperty("blendShapeMaster")
+  BlendShapeMaster blendShapes;
 
   @JsonProperty("humanoid")
+  @JsonDeserialize(using = HumanoidDeserializer.class)
   @Getter
   private Humanoid humanoid;
 
+
   public void init(GltfModel base) {
     this.base = base;
+    getBlendShapeGroups().forEach(g -> initBlendShapeGroup(g, base));
+  }
+
+  private void initBlendShapeGroup(BlendShapeGroup group, GltfModel model) {
+    group.getBindings().forEach(b -> initBlendShapeBindings(b, model));
+  }
+
+  private void initBlendShapeBindings(BlendShapeBinding binding, GltfModel model) {
+    ((BlendShapeBindingImpl) binding).init(model);
+  }
+
+  @Override
+  public List<BlendShapeGroup> getBlendShapeGroups() {
+    return blendShapes.getBlendShapeGroups();
   }
 
   @Override

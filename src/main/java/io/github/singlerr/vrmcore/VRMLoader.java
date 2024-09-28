@@ -1,29 +1,25 @@
 package io.github.singlerr.vrmcore;
 
 import de.javagl.jgltf.model.GltfModel;
+import io.github.singlerr.vrmcore.component.VRMFactory;
+import lombok.Setter;
 
 public class VRMLoader {
 
-  private static VRMFactory factory;
-
-  public static void setFactory(VRMFactory factory) {
-    if (VRMLoader.factory != null) {
-      throw new IllegalStateException("Cannot assign factory twice!");
-    }
-    VRMLoader.factory = factory;
-  }
-
+  @Setter
+  private VRMFactory factory;
   private final GltfModel model;
 
   public VRMLoader(GltfModel model) {
     this.model = model;
   }
 
+
   public VRMExtension load() throws IllegalStateException {
-    if (VRMLoader.factory == null) {
+    if (factory == null) {
       throw new IllegalStateException("VRMLoader is not initialized!");
     }
 
-    return VRMLoader.factory.create(model);
+    return factory.create(model);
   }
 }
