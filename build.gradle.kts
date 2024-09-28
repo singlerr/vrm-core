@@ -25,13 +25,16 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.compileJava {
+    options.release = 8
+}
 
-java{
+java {
     withSourcesJar()
     withJavadocJar()
 }
 
-tasks.withType<Javadoc>{
+tasks.withType<Javadoc> {
     isFailOnError = false
 }
 

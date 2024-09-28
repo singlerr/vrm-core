@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import io.github.singlerr.vrmcore.BlendShapeBinding;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlendShapeBindingDeserializer extends JsonDeserializer<List<BlendShapeBinding>> {
 
@@ -16,6 +17,6 @@ public class BlendShapeBindingDeserializer extends JsonDeserializer<List<BlendSh
     List<BlendShapeBindingImpl> bindings =
         p.readValueAs(new TypeReference<List<BlendShapeBindingImpl>>() {
         });
-    return bindings.stream().map(b -> (BlendShapeBinding) b).toList();
+    return bindings.stream().map(b -> (BlendShapeBinding) b).collect(Collectors.toList());
   }
 }
