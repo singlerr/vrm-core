@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Data
 @Getter
-@JsonIgnoreProperties()
+@JsonIgnoreProperties(ignoreUnknown = true)
 class BlendShapeMaster {
 
   @JsonProperty("blendShapeGroups")

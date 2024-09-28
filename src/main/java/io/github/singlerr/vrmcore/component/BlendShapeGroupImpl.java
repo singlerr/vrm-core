@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Data
 @Getter
-@JsonIgnoreProperties(value = {"materialValues"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 class BlendShapeGroupImpl implements BlendShapeGroup {
 
   @JsonProperty("binds")

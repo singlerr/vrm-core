@@ -30,8 +30,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@JsonIgnoreProperties(value = {"exporterVersion", "meta", "firstPerson", "secondaryAnimation",
-    "materialProperties", "specVersion"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 class VRM implements VRMExtension {
 
   @JsonIgnore

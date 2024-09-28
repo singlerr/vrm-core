@@ -1,5 +1,6 @@
 package io.github.singlerr.vrmcore.component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import de.javagl.jgltf.model.GltfModel;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Data
 @Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 class BlendShapeBindingImpl implements BlendShapeBinding {
 
   @JsonProperty("mesh")

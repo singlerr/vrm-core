@@ -1,5 +1,6 @@
 package io.github.singlerr.vrmcore.component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.github.singlerr.vrmcore.HumanBone;
@@ -11,6 +12,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Getter
+@JsonIgnoreProperties(ignoreUnknown = true)
 class HumanoidImpl implements Humanoid {
 
   @JsonProperty("armStretch")
