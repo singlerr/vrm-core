@@ -6,8 +6,6 @@ import io.github.singlerr.vrmcore.VRMExtension;
 
 public interface VRMFactory {
 
-  VRMExtension create(GltfModel model);
-
   static VRMFactory getDefault() {
     return new VRMFactory() {
       @Override
@@ -22,4 +20,6 @@ public interface VRMFactory {
       }
     };
   }
+
+  VRMExtension create(GltfModel model);
 }

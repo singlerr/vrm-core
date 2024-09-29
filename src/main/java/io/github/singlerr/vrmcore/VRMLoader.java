@@ -6,9 +6,9 @@ import lombok.Setter;
 
 public class VRMLoader {
 
+  private final GltfModel model;
   @Setter
   private VRMFactory factory;
-  private final GltfModel model;
 
   public VRMLoader(GltfModel model) {
     this.model = model;

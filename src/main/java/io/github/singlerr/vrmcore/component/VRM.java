@@ -36,6 +36,14 @@ class VRM implements VRMExtension {
 
   @JsonIgnore
   private static final JsonMapper MAPPER = new JsonMapper();
+  @JsonProperty("blendShapeMaster")
+  BlendShapeMaster blendShapes;
+  @JsonIgnore
+  private GltfModel base;
+  @JsonProperty("humanoid")
+  @JsonDeserialize(using = HumanoidDeserializer.class)
+  @Getter
+  private Humanoid humanoid;
 
   public static VRM create(GltfModel model) throws JsonProcessingException {
     Map<String, Object> root =
@@ -43,18 +51,6 @@ class VRM implements VRMExtension {
 
     return MAPPER.convertValue(root, VRM.class);
   }
-
-  @JsonIgnore
-  private GltfModel base;
-
-  @JsonProperty("blendShapeMaster")
-  BlendShapeMaster blendShapes;
-
-  @JsonProperty("humanoid")
-  @JsonDeserialize(using = HumanoidDeserializer.class)
-  @Getter
-  private Humanoid humanoid;
-
 
   public void init(GltfModel base) {
     this.base = base;

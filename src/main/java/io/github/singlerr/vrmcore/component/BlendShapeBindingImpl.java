@@ -28,6 +28,9 @@ class BlendShapeBindingImpl implements BlendShapeBinding {
   private NodeModel targetNode;
 
   public void init(GltfModel model) {
+    if (node >= model.getNodeModels().size()) {
+      return;
+    }
     this.targetNode = model.getNodeModels().get(node);
   }
 }
