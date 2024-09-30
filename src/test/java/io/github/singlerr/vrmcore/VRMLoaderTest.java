@@ -1,10 +1,11 @@
 package io.github.singlerr.vrmcore;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.javagl.jgltf.model.GltfModel;
 import de.javagl.jgltf.model.io.GltfModelReader;
-import io.github.singlerr.vrmcore.component.VRMFactory;
+import io.github.singlerr.vrmcore.v0.impl.VRMFactory;
 import java.io.IOException;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.MethodOrderer;
@@ -34,6 +35,7 @@ class VRMLoaderTest {
   void validateModel() {
     assertNotNull(vrm.getBlendShapeGroups());
     assertNotNull(vrm.getHumanoid());
+    assertNotNull(vrm.getAnimations());
   }
 
   @Test
@@ -43,6 +45,19 @@ class VRMLoaderTest {
       for (BlendShapeBinding binding : g.getBindings()) {
         assertNotNull(binding.getTargetNode());
       }
+    }
+  }
+
+  @Test
+  @Order(4)
+  void validateAnimations() {
+    for (BoneGroup boneGroup : vrm.getAnimations().getBoneGroups()) {
+      assertNotNull(boneGroup);
+      assertFalse(boneGroup.getBoneNodes().isEmpty());
+    }
+
+    for (ColliderGroup colliderGroup : vrm.getAnimations().getColliderGroups()) {
+      assertNotNull(colliderGroup.getTargetNode());
     }
   }
 }

@@ -1,4 +1,4 @@
-package io.github.singlerr.vrmcore.component;
+package io.github.singlerr.vrmcore.v0.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,29 +21,39 @@ import de.javagl.jgltf.model.NodeModel;
 import de.javagl.jgltf.model.SceneModel;
 import de.javagl.jgltf.model.SkinModel;
 import de.javagl.jgltf.model.TextureModel;
+import io.github.singlerr.vrmcore.Animations;
 import io.github.singlerr.vrmcore.BlendShapeBinding;
 import io.github.singlerr.vrmcore.BlendShapeGroup;
+import io.github.singlerr.vrmcore.BoneGroup;
+import io.github.singlerr.vrmcore.ColliderGroup;
 import io.github.singlerr.vrmcore.HumanBone;
 import io.github.singlerr.vrmcore.Humanoid;
 import io.github.singlerr.vrmcore.VRMExtension;
 import io.github.singlerr.vrmcore.utils.Validate;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
+import lombok.Data;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Data
 class VRM implements VRMExtension {
 
   @JsonIgnore
   private static final JsonMapper MAPPER = new JsonMapper();
+
   @JsonProperty("blendShapeMaster")
   BlendShapeMaster blendShapes;
+
   @JsonIgnore
   private GltfModel base;
+
   @JsonProperty("humanoid")
   @JsonDeserialize(using = HumanoidDeserializer.class)
-  @Getter
   private Humanoid humanoid;
+
+  @JsonProperty("secondaryAnimation")
+  @JsonDeserialize(using = AnimationsDeserializer.class)
+  private Animations animations;
 
   public static VRM create(GltfModel model) throws JsonProcessingException {
     Map<String, Object> root =
@@ -56,6 +66,17 @@ class VRM implements VRMExtension {
     this.base = base;
     getBlendShapeGroups().forEach(g -> initBlendShapeGroup(g, base));
     getHumanoid().getBones().forEach(b -> initHumanBone(b, base));
+    getAnimations().getBoneGroups().forEach(g -> initBoneGroup(g, base));
+    getAnimations().getColliderGroups().forEach(g -> initColliderGroup(g, base));
+  }
+
+
+  private void initColliderGroup(ColliderGroup group, GltfModel model) {
+    ((ColliderGroupImpl) group).init(model);
+  }
+
+  private void initBoneGroup(BoneGroup group, GltfModel model) {
+    ((BoneGroupImpl) group).init(model);
   }
 
   private void initBlendShapeGroup(BlendShapeGroup group, GltfModel model) {

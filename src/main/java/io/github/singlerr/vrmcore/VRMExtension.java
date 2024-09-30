@@ -10,4 +10,6 @@ public interface VRMExtension extends GltfModel {
 
   Humanoid getHumanoid();
 
+  Animations getAnimations();
+
 }

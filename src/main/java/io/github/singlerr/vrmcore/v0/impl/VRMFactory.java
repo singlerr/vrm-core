@@ -1,4 +1,4 @@
-package io.github.singlerr.vrmcore.component;
+package io.github.singlerr.vrmcore.v0.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import de.javagl.jgltf.model.GltfModel;

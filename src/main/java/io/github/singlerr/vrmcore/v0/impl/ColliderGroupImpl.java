@@ -1,4 +1,4 @@
-package io.github.singlerr.vrmcore.component;
+package io.github.singlerr.vrmcore.v0.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -6,33 +6,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import de.javagl.jgltf.model.GltfModel;
 import de.javagl.jgltf.model.NodeModel;
-import io.github.singlerr.vrmcore.HumanBone;
+import io.github.singlerr.vrmcore.Collider;
+import io.github.singlerr.vrmcore.ColliderGroup;
+import java.util.List;
 import lombok.Data;
-import lombok.Getter;
-import lombok.experimental.Accessors;
 
 @Data
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-class HumanBoneImpl implements HumanBone {
+public class ColliderGroupImpl implements ColliderGroup {
 
-  @JsonProperty("bone")
-  private String name;
+  @JsonProperty("colliders")
+  @JsonDeserialize(using = ColliderDeserializer.class)
+  private List<Collider> colliders;
+
   @JsonProperty("node")
   @JsonDeserialize(using = FloatToIntDeserializer.class)
   private int node;
-
-  @JsonProperty("useDefaultValues")
-  @Accessors(fluent = true)
-  private boolean useDefaultValues;
 
   @JsonIgnore
   private NodeModel targetNode;
 
   public void init(GltfModel model) {
-    if (node >= model.getNodeModels().size()) {
-      return;
+    if (node < model.getNodeModels().size()) {
+      targetNode = model.getNodeModels().get(node);
     }
-    this.targetNode = model.getNodeModels().get(node);
   }
 }

@@ -1,7 +1,7 @@
 package io.github.singlerr.vrmcore;
 
 import de.javagl.jgltf.model.GltfModel;
-import io.github.singlerr.vrmcore.component.VRMFactory;
+import io.github.singlerr.vrmcore.v0.impl.VRMFactory;
 import lombok.Setter;
 
 public class VRMLoader {
