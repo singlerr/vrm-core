@@ -12,7 +12,9 @@ public interface BoneGroup {
 
   List<Integer> getColliderGroups();
 
-  float getCenter();
+  int getCenter();
+
+  NodeModel getCenterNode();
 
   float getDragForce();
 

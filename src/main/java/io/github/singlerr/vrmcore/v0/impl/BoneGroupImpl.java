@@ -28,7 +28,11 @@ public class BoneGroupImpl implements BoneGroup {
   private List<Integer> colliderGroups;
 
   @JsonProperty("center")
-  private float center;
+  @JsonDeserialize(using = FloatToIntDeserializer.class)
+  private int center;
+
+  @JsonIgnore
+  private NodeModel centerNode;
 
   @JsonProperty("comment")
   private String comment;
@@ -52,5 +56,8 @@ public class BoneGroupImpl implements BoneGroup {
     this.boneNodes = bones.stream().filter(n -> n < model.getNodeModels().size())
         .map(n -> model.getNodeModels().get(n)).collect(
             Collectors.toList());
+    if (center > 0 && center < model.getNodeModels().size()) {
+      centerNode = model.getNodeModels().get(center);
+    }
   }
 }
