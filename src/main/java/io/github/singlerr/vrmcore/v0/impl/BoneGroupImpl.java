@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BoneGroupImpl implements BoneGroup {
+class BoneGroupImpl implements BoneGroup {
 
   @JsonProperty("bones")
   @JsonDeserialize(using = FloatListToIntListDeserializer.class)
@@ -56,7 +56,7 @@ public class BoneGroupImpl implements BoneGroup {
     this.boneNodes = bones.stream().filter(n -> n < model.getNodeModels().size())
         .map(n -> model.getNodeModels().get(n)).collect(
             Collectors.toList());
-    if (center > 0 && center < model.getNodeModels().size()) {
+    if (center >= 0 && center < model.getNodeModels().size()) {
       centerNode = model.getNodeModels().get(center);
     }
   }

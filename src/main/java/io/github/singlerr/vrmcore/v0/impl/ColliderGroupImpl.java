@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ColliderGroupImpl implements ColliderGroup {
+class ColliderGroupImpl implements ColliderGroup {
 
   @JsonProperty("colliders")
   @JsonDeserialize(using = ColliderDeserializer.class)

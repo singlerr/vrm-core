@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ColliderImpl implements Collider {
+class ColliderImpl implements Collider {
 
   @JsonProperty("radius")
   float radius;

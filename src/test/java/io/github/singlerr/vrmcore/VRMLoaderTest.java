@@ -4,10 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.javagl.jgltf.model.GltfModel;
+import de.javagl.jgltf.model.ImageModel;
 import de.javagl.jgltf.model.io.GltfModelReader;
 import io.github.singlerr.vrmcore.v0.impl.VRMFactory;
+import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -28,6 +34,12 @@ class VRMLoaderTest {
     VRMLoader loader = new VRMLoader(model);
     loader.setFactory(VRMFactory.getDefault());
     vrm = loader.load();
+
+    try{
+      exportImages(model, Paths.get("out"));
+    }catch (IOException e){
+      throw new RuntimeException(e);
+    }
   }
 
   @Test
@@ -59,5 +71,18 @@ class VRMLoaderTest {
     for (ColliderGroup colliderGroup : vrm.getAnimations().getColliderGroups()) {
       assertNotNull(colliderGroup.getTargetNode());
     }
+  }
+
+  private void exportImages(GltfModel model, Path parentDir) throws IOException{
+    for (ImageModel imageModel : model.getImageModels()) {
+      Files.write(parentDir.resolve(imageModel.getName() + ".png"), getBytes(imageModel.getBufferViewModel().getBufferViewData(), 0, imageModel.getBufferViewModel().getByteLength()),
+          StandardOpenOption.CREATE);
+    }
+  }
+
+  private byte[] getBytes(ByteBuffer buffer, int offset, int length){
+    byte[] data = new byte[length];
+    buffer.get(data, offset, length);
+    return data;
   }
 }
