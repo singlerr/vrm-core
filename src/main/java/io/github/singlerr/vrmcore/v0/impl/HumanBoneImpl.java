@@ -16,23 +16,23 @@ import lombok.experimental.Accessors;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class HumanBoneImpl implements HumanBone {
 
-  @JsonProperty("bone")
-  private String name;
-  @JsonProperty("node")
-  @JsonDeserialize(using = FloatToIntDeserializer.class)
-  private int node;
+    @JsonProperty("bone")
+    private String name;
+    @JsonProperty("node")
+    @JsonDeserialize(using = FloatToIntDeserializer.class)
+    private int node;
 
-  @JsonProperty("useDefaultValues")
-  @Accessors(fluent = true)
-  private boolean useDefaultValues;
+    @JsonProperty("useDefaultValues")
+    @Accessors(fluent = true)
+    private boolean useDefaultValues;
 
-  @JsonIgnore
-  private NodeModel targetNode;
+    @JsonIgnore
+    private NodeModel targetNode;
 
-  public void init(GltfModel model) {
-    if (node >= model.getNodeModels().size()) {
-      return;
+    public void init(GltfModel model) {
+        if (node >= model.getNodeModels().size()) {
+            return;
+        }
+        this.targetNode = model.getNodeModels().get(node);
     }
-    this.targetNode = model.getNodeModels().get(node);
-  }
 }

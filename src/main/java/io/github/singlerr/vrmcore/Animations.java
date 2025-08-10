@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface Animations {
 
-  List<BoneGroup> getBoneGroups();
+    List<BoneGroup> getBoneGroups();
 
-  List<ColliderGroup> getColliderGroups();
+    List<ColliderGroup> getColliderGroups();
 
 }

@@ -6,19 +6,20 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.github.singlerr.vrmcore.Animations;
 import io.github.singlerr.vrmcore.BoneGroup;
 import io.github.singlerr.vrmcore.ColliderGroup;
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SecondaryAnimation implements Animations {
 
-  @JsonProperty("boneGroups")
-  @JsonDeserialize(using = BoneGroupDeserializer.class)
-  private List<BoneGroup> boneGroups;
+    @JsonProperty("boneGroups")
+    @JsonDeserialize(using = BoneGroupDeserializer.class)
+    private List<BoneGroup> boneGroups;
 
-  @JsonProperty("colliderGroups")
-  @JsonDeserialize(using = ColliderGroupDeserializer.class)
-  private List<ColliderGroup> colliderGroups;
+    @JsonProperty("colliderGroups")
+    @JsonDeserialize(using = ColliderGroupDeserializer.class)
+    private List<ColliderGroup> colliderGroups;
 
 }

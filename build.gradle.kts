@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 
     implementation(libs.jgltf.model)
+    implementation(libs.joml)
     implementation(libs.jetbrains.annotations)
 }
 

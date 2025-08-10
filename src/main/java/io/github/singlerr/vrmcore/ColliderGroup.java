@@ -1,14 +1,15 @@
 package io.github.singlerr.vrmcore;
 
 import de.javagl.jgltf.model.NodeModel;
+
 import java.util.List;
 
 public interface ColliderGroup {
 
-  int getNode();
+    int getNode();
 
-  NodeModel getTargetNode();
+    NodeModel getTargetNode();
 
-  List<Collider> getColliders();
+    List<Collider> getColliders();
 
 }

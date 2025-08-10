@@ -6,20 +6,20 @@ import lombok.Setter;
 
 public class VRMLoader {
 
-  private final GltfModel model;
-  @Setter
-  private VRMFactory factory;
+    private final GltfModel model;
+    @Setter
+    private VRMFactory factory;
 
-  public VRMLoader(GltfModel model) {
-    this.model = model;
-  }
-
-
-  public VRMExtension load() throws IllegalStateException {
-    if (factory == null) {
-      throw new IllegalStateException("VRMLoader is not initialized!");
+    public VRMLoader(GltfModel model) {
+        this.model = model;
     }
 
-    return factory.create(model);
-  }
+
+    public VRMExtension load() throws IllegalStateException {
+        if (factory == null) {
+            throw new IllegalStateException("VRMLoader is not initialized!");
+        }
+
+        return factory.create(model);
+    }
 }

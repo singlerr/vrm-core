@@ -4,8 +4,8 @@ import io.github.singlerr.vrmcore.utils.Vector3f;
 
 public interface Collider {
 
-  Vector3f getOffset();
+    Vector3f getOffset();
 
-  float getRadius();
+    float getRadius();
 
 }

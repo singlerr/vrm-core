@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Vector3f {
 
-  private float x;
-  private float y;
-  private float z;
+    private float x;
+    private float y;
+    private float z;
 }

@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface BlendShapeGroup {
 
-  List<BlendShapeBinding> getBindings();
+    List<BlendShapeBinding> getBindings();
 
-  boolean isBinary();
+    boolean isBinary();
 
-  String getName();
+    String getName();
 
-  String getPresetName();
+    String getPresetName();
 }

@@ -15,22 +15,22 @@ import org.jetbrains.annotations.Nullable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class BlendShapeBindingImpl implements BlendShapeBinding {
 
-  @JsonProperty("mesh")
-  @JsonDeserialize(using = FloatToIntDeserializer.class)
-  private int index;
-  @JsonProperty("index")
-  @JsonDeserialize(using = FloatToIntDeserializer.class)
-  private int node;
-  @JsonProperty("weight")
-  private float weight;
+    @JsonProperty("mesh")
+    @JsonDeserialize(using = FloatToIntDeserializer.class)
+    private int index;
+    @JsonProperty("index")
+    @JsonDeserialize(using = FloatToIntDeserializer.class)
+    private int node;
+    @JsonProperty("weight")
+    private float weight;
 
-  @Nullable
-  private NodeModel targetNode;
+    @Nullable
+    private NodeModel targetNode;
 
-  public void init(GltfModel model) {
-    if (node >= model.getNodeModels().size()) {
-      return;
+    public void init(GltfModel model) {
+        if (node >= model.getNodeModels().size()) {
+            return;
+        }
+        this.targetNode = model.getNodeModels().get(node);
     }
-    this.targetNode = model.getNodeModels().get(node);
-  }
 }

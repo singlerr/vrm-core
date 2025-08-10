@@ -4,11 +4,11 @@ import de.javagl.jgltf.model.NodeModel;
 
 public interface BlendShapeBinding {
 
-  int getIndex();
+    int getIndex();
 
-  int getNode();
+    int getNode();
 
-  float getWeight();
+    float getWeight();
 
-  NodeModel getTargetNode();
+    NodeModel getTargetNode();
 }

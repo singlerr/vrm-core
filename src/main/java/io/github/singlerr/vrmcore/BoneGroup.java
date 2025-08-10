@@ -2,30 +2,31 @@ package io.github.singlerr.vrmcore;
 
 import de.javagl.jgltf.model.NodeModel;
 import io.github.singlerr.vrmcore.utils.Vector3f;
+
 import java.util.List;
 
 public interface BoneGroup {
 
-  List<Integer> getBones();
+    List<Integer> getBones();
 
-  List<NodeModel> getBoneNodes();
+    List<NodeModel> getBoneNodes();
 
-  List<Integer> getColliderGroups();
+    List<Integer> getColliderGroups();
 
-  int getCenter();
+    int getCenter();
 
-  NodeModel getCenterNode();
+    NodeModel getCenterNode();
 
-  float getDragForce();
+    float getDragForce();
 
-  String getComment();
+    String getComment();
 
-  Vector3f getGravityDir();
+    Vector3f getGravityDir();
 
-  float getGravityPower();
+    float getGravityPower();
 
-  float getHitRadius();
+    float getHitRadius();
 
-  float getStiffiness();
+    float getStiffiness();
 
 }

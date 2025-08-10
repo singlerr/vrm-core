@@ -8,56 +8,57 @@ import de.javagl.jgltf.model.GltfModel;
 import de.javagl.jgltf.model.NodeModel;
 import io.github.singlerr.vrmcore.BoneGroup;
 import io.github.singlerr.vrmcore.utils.Vector3f;
+import lombok.Data;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 class BoneGroupImpl implements BoneGroup {
 
-  @JsonProperty("bones")
-  @JsonDeserialize(using = FloatListToIntListDeserializer.class)
-  private List<Integer> bones;
+    @JsonProperty("bones")
+    @JsonDeserialize(using = FloatListToIntListDeserializer.class)
+    private List<Integer> bones;
 
-  @JsonIgnore
-  private List<NodeModel> boneNodes;
+    @JsonIgnore
+    private List<NodeModel> boneNodes;
 
-  @JsonProperty("colliderGroups")
-  @JsonDeserialize(using = FloatListToIntListDeserializer.class)
-  private List<Integer> colliderGroups;
+    @JsonProperty("colliderGroups")
+    @JsonDeserialize(using = FloatListToIntListDeserializer.class)
+    private List<Integer> colliderGroups;
 
-  @JsonProperty("center")
-  @JsonDeserialize(using = FloatToIntDeserializer.class)
-  private int center;
+    @JsonProperty("center")
+    @JsonDeserialize(using = FloatToIntDeserializer.class)
+    private int center;
 
-  @JsonIgnore
-  private NodeModel centerNode;
+    @JsonIgnore
+    private NodeModel centerNode;
 
-  @JsonProperty("comment")
-  private String comment;
+    @JsonProperty("comment")
+    private String comment;
 
-  @JsonProperty("dragForce")
-  private float dragForce;
+    @JsonProperty("dragForce")
+    private float dragForce;
 
-  @JsonProperty("gravityDir")
-  private Vector3f gravityDir;
+    @JsonProperty("gravityDir")
+    private Vector3f gravityDir;
 
-  @JsonProperty("gravityPower")
-  private float gravityPower;
+    @JsonProperty("gravityPower")
+    private float gravityPower;
 
-  @JsonProperty("hitRadius")
-  private float hitRadius;
+    @JsonProperty("hitRadius")
+    private float hitRadius;
 
-  @JsonProperty("stiffiness")
-  private float stiffiness;
+    @JsonProperty("stiffiness")
+    private float stiffiness;
 
-  public void init(GltfModel model) {
-    this.boneNodes = bones.stream().filter(n -> n < model.getNodeModels().size())
-        .map(n -> model.getNodeModels().get(n)).collect(
-            Collectors.toList());
-    if (center >= 0 && center < model.getNodeModels().size()) {
-      centerNode = model.getNodeModels().get(center);
+    public void init(GltfModel model) {
+        this.boneNodes = bones.stream().filter(n -> n < model.getNodeModels().size())
+                .map(n -> model.getNodeModels().get(n)).collect(
+                        Collectors.toList());
+        if (center >= 0 && center < model.getNodeModels().size()) {
+            centerNode = model.getNodeModels().get(center);
+        }
     }
-  }
 }

@@ -4,11 +4,11 @@ import de.javagl.jgltf.model.NodeModel;
 
 public interface HumanBone {
 
-  String getName();
+    String getName();
 
-  int getNode();
+    int getNode();
 
-  boolean useDefaultValues();
+    boolean useDefaultValues();
 
-  NodeModel getTargetNode();
+    NodeModel getTargetNode();
 }

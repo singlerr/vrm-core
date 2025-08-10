@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface Humanoid {
 
-  float getArmStretch();
+    float getArmStretch();
 
-  float getLegStretch();
+    float getLegStretch();
 
-  float getLowerArmTwist();
+    float getLowerArmTwist();
 
-  float getLowerLegTwist();
+    float getLowerLegTwist();
 
-  float getUpperArmTwist();
+    float getUpperArmTwist();
 
-  float getUpperLegTwist();
+    float getUpperLegTwist();
 
-  float getFeetSpacing();
+    float getFeetSpacing();
 
-  boolean hasTranslationDoF();
+    boolean hasTranslationDoF();
 
-  List<HumanBone> getBones();
+    List<HumanBone> getBones();
 }

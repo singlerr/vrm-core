@@ -10,8 +10,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class ColliderImpl implements Collider {
 
-  @JsonProperty("radius")
-  float radius;
-  @JsonProperty("offset")
-  private Vector3f offset;
+    @JsonProperty("radius")
+    float radius;
+    @JsonProperty("offset")
+    private Vector3f offset;
 }

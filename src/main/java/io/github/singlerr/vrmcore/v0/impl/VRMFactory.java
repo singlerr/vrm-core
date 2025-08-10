@@ -6,20 +6,20 @@ import io.github.singlerr.vrmcore.VRMExtension;
 
 public interface VRMFactory {
 
-  static VRMFactory getDefault() {
-    return new VRMFactory() {
-      @Override
-      public VRMExtension create(GltfModel model) {
-        try {
-          VRM vrm = VRM.create(model);
-          vrm.init(model);
-          return vrm;
-        } catch (JsonProcessingException e) {
-          return null;
-        }
-      }
-    };
-  }
+    static VRMFactory getDefault() {
+        return new VRMFactory() {
+            @Override
+            public VRMExtension create(GltfModel model) {
+                try {
+                    VRM vrm = VRM.create(model);
+                    vrm.init(model);
+                    return vrm;
+                } catch (JsonProcessingException e) {
+                    return null;
+                }
+            }
+        };
+    }
 
-  VRMExtension create(GltfModel model);
+    VRMExtension create(GltfModel model);
 }

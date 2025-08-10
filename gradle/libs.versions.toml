@@ -1,11 +1,13 @@
 [versions]
 jgltf = "2.0.4"
 gson = "2.9.0"
+joml = "1.10.8"
 
 [libraries]
 jgltf-model = { module = "de.javagl:jgltf-model", version.ref = "jgltf" }
 jetbrains-annotations = { module = "org.jetbrains:annotations", version = "25.0.0" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+joml = { module = "org.joml:joml", version.ref = "joml" }
 
 [plugins]
 lombok = { id = "io.freefair.lombok", version = "8.10" }
